@@ -2,9 +2,7 @@ package chapter8_file_reader_writer;
 
 public class Example1 {
 	public static <E> void printArr(E[] array) {
-		for (E element : array) {
-			System.out.println(element);
-		}
+		
 	}
 
 	public static void array_example1() {
