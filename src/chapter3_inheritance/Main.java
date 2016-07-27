@@ -10,14 +10,9 @@ package chapter3_inheritance;
 
 */
 
-
-
-
-public class Main 
-{
-	public static void main(String[] args) 
-	{
-		Examples Program=new Examples();
+public class Main {
+	public static void main(String[] args) {
+		Examples Program = new Examples();
 		Program.start();
 	}
 }

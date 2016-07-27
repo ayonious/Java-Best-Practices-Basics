@@ -1,4 +1,5 @@
 package chapter6_STL;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -23,4 +24,3 @@ public class freopen_java {
 		}
 	}
 }
-

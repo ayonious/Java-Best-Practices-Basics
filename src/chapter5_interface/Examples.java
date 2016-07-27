@@ -8,17 +8,17 @@ and put comments there
 
 */
 
-public class Examples  {
+public class Examples {
 	void example1() {
 		A a;
-		A1 a1=new A1();
-		a=a1;
-		
+		A1 a1 = new A1();
+		a = a1;
+
 		a.printA();
-		//same as abstract
+		// same as abstract
 	}
-	
-	public void start()  {
+
+	public void start() {
 		example1();
-	}	
+	}
 }
