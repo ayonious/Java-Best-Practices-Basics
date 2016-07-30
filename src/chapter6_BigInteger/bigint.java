@@ -21,10 +21,9 @@ public class bigint {
 
 		System.out.println(BG);
 
-		for (i = 1; i <= 100000; i++) {
-			// BG=BG.multiply(BigInteger.valueOf(i));
-
-			// System.out.println(BG.bitLength());
+		for (i = 1; i <= 10; i++) {
+			BG=BG.multiply(BigInteger.valueOf(i));
+			System.out.println(BG.bitLength());
 		}
 
 		System.out.println(BG.bitLength());
