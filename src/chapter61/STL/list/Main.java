@@ -34,12 +34,11 @@ public class Main {
 
 	public static void main (String[] args) { 
 		Main prog=new Main();
-		
+
 		prog.example3_arraylist_generalized();
 		//prog.example2_linkedlist();
 		//prog.example1_arraylist();
 	}
-	
 
 	void example1_arraylist() {
 		List<String> names = new ArrayList<String>(3); // 3 because we expect the list 
@@ -92,10 +91,14 @@ public class Main {
         linkedlist.remove(2);
         System.out.println("Final Content: " +linkedlist); 
 	}
-	
+
 	//every element is object having no particular type
 	void example3_arraylist_generalized() {
-		List names = new ArrayList(3);
+		//this works too but gives warning
+		//List names = new ArrayList(3);
+
+		List<Object> names = new ArrayList<Object>(3);
+
 		names.add("Alice");
 		names.add("Bob");
 		names.add("Charlie");

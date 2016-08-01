@@ -1,93 +1,170 @@
 package chapter62_STL.map;
 
-import java.io.*;
-import java.util.*;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class Main {
-	class my {
+	public static void main(String[] args) {
+		Main prog = new Main();
+		// prog.example1_TreeMap();
+		// prog.example2_HashMap();
+		prog.example3_LinkedHashMap();
+	}
+
+	// materials for example 1
+	void example1_TreeMap() {
+		Map<Integer, String> map = new TreeMap<Integer, String>();
+
+		map.put(1, "something1");
+		map.put(4, "something4");
+		map.put(3, "something3");
+		map.put(100, "something100");
+		map.put(-1, "something-1");
+
+		Set set = map.entrySet();
+		Iterator it = set.iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, String> entry = (Entry<Integer, String>) it.next();
+			System.out.println(entry.getKey() + " has the value: " + entry.getValue());
+		}
+	}
+
+	// materials for example 2
+	void example2_HashMap() {
+		Map<Integer, String> map = new HashMap<Integer, String>();
+
+		map.put(1, "something1");
+		map.put(4, "something4");
+		map.put(3, "something3");
+		map.put(100, "something100");
+		map.put(-1, "something-1");
+
+		Set set = map.entrySet();
+		Iterator it = set.iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, String> entry = (Entry<Integer, String>) it.next();
+			System.out.println(entry.getKey() + " has the value: " + entry.getValue());
+		}
+	}
+
+	// materials for example 3
+	/*
+	 * Hash table and linked list implementation of the Map interface, with
+	 * predictable iteration order. This implementation differs from HashMap in
+	 * that it maintains a doubly-linked list running through all of its
+	 * entries. This linked list defines the iteration ordering, which is
+	 * normally the order in which keys were inserted into the map
+	 * (insertion-order).
+	 */
+	void example3_LinkedHashMap() {
+		Map<Integer, String> map = new LinkedHashMap<Integer, String>();
+
+		map.put(1, "something1");
+		map.put(4, "something4");
+		map.put(4, "something4again");
+		map.put(3, "something3");
+		map.put(100, "something100");
+		map.put(-1, "something-1");
+
+		Set set = map.entrySet();
+		Iterator it = set.iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, String> entry = (Entry<Integer, String>) it.next();
+			System.out.println(entry.getKey() + " has the value: " + entry.getValue());
+		}
+		/*
+		1 has the value: something1
+		4 has the value: something4again
+		3 has the value: something3
+		100 has the value: something100
+		-1 has the value: something-1
+		*/
+	}
+
+	// materials for example 4
+	class Key {
 		int a;
 		String s;
 
-		my(String st, int i) {
+		Key(String st, int i) {
 			s = st;
 			a = i;
 		}
 
-		my(int i) {
+		Key(int i) {
 			s = "nothing here :P";
 			a = i;
 		}
 
-		my(String st) {
+		Key(String st) {
 			s = st;
 			a = 0;
 		}
+	}
 
-		int gcd(int x, int y) {
-			if (x == 0)
-				return y;
+	class Val {
+		int k;
+
+		Val(int i) {
+			k = i;
+		}
+	}
+
+	class cmp implements Comparator<Key> {
+		@Override
+		public int compare(Key x, Key y) {
+			// 3 ta line e lagbe
+			if (x.a > y.a)
+				return 1;
+			if (x.a < y.a)
+				return -1;
 			else
-				return gcd(y, x % y);
+				return 0;
 		}
 	}
 
-	public static void main (String[] args) { 
-		Main prog=new Main();
-		prog.example2_linkedlist();
-		//prog.example1_arraylist();
-	}
-	
+	void example4_comparator() {
+		Comparator<Key> c1 = new cmp();
 
-	void example1_arraylist() {
-		List<String> names = new ArrayList<String>(3); // 3 because we expect the list 
-		    // to have 3 entries.  If we didn't know how many entries we expected, we
-		    // could leave this empty
-		names.add("Alice");
-		names.add("Bob");
-		names.add("Charlie");
-		System.out.println(names.get(2)); // prints "Charlie"
-		System.out.println(names); // prints the whole list
-		for (String name: names) {
-		    System.out.println(name);  // prints the names in turn.
+		// no point in using a hashmap with a comparator
+		// because hash map is not ordered
+		Map<Key, Val> map = new TreeMap<Key, Val>(c1);
+
+		for (int i = 0; i <= 10; i++) {
+			Key k = new Key(i);
+			Val v = new Val(2 * i);
+			map.put(k, v);
 		}
-	}
-	
-	void example2_linkedlist() {
-		/* Linked List Declaration */
-        LinkedList<String> linkedlist = new LinkedList<String>();
 
-        /*add(String Element) is used for adding 
-         * the elements to the linked list*/
-        linkedlist.add("Item1");
-        linkedlist.add("Item5");
-        linkedlist.add("Item3");
-        linkedlist.add("Item6");
-        linkedlist.add("Item2");
+		Key k = new Key(4);
+		Val v = map.get(k);
+		System.out.println(v.k);
 
-        /*Display Linked List Content*/
-        System.out.println("Linked List Content: " +linkedlist);
+		// traverse all the values
+		for (Val val : map.values()) {
+			System.out.println(val.k);
+		}
+		System.out.println("");
 
-        /*Add First and Last Element*/
-        linkedlist.addFirst("First Item");
-        linkedlist.addLast("Last Item");
-        System.out.println("LinkedList Content after addition: " +linkedlist);
+		// traversing all the key value pairs
+		for (Key key : map.keySet()) {
+			Val val = map.get(key);
+			System.out.println(key.a + " " + val.k);
+			// do something to value
+		}
 
-        /*This is how to get and set Values*/
-        Object firstvar = linkedlist.get(0);
-        System.out.println("First element: " +firstvar);
-        linkedlist.set(0, "Changed first item");
-        Object firstvar2 = linkedlist.get(0);
-        System.out.println("First element after update by set method: " +firstvar2);
-
-        /*Remove first and last element*/
-        linkedlist.removeFirst();
-        linkedlist.removeLast();
-        System.out.println("LinkedList after deletion of first and last element: " +linkedlist);
-
-        /* Add to a Position and remove from a position*/
-        linkedlist.add(0, "Newly added item");
-        linkedlist.remove(2);
-        System.out.println("Final Content: " +linkedlist); 
+		// traversing all the key value pairs
+		Set set = map.entrySet();
+		Iterator it = set.iterator();
+		while (it.hasNext()) {
+			Map.Entry<Key, Val> entry = (Entry<Key, Val>) it.next();
+			System.out.println(entry.getKey().a + " has the value: " + entry.getValue().k);
+		}
 	}
 }

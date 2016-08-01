@@ -2,7 +2,7 @@ package chapter6_BigInteger;
 
 import java.math.BigInteger;
 
-public class bigint {
+public class Main {
 	public static void main(String args[]) throws Exception {
 
 		BigInteger bi = new BigInteger("12323", 10);// string,base
