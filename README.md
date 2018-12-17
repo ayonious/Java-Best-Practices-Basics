@@ -8,12 +8,12 @@
 4. Each chapter may contain several examples. See the examples in the "Examples.java" file to select these examples
 
 ## Project Chapter index
-1. chapter1/array	- Huge refactoring
-2. chapter2/class_	- Huge refactoring
-3. chapter31/inheritance	- Huge refactoring
+1. chapter1/array
+2. chapter2/class_
+3. chapter31/inheritance
 4. chapter32/multiple_inheritance_not_supported
 5. chapter33/inheritance_dynamic_method_dispatch
-6. chapter4
+6. chapter4 Abstract and Method overriding
 7. chapter5_interface
 8. chapter61/STL/list
 9. chapter62_STL
